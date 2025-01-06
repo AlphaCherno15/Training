@@ -1,27 +1,25 @@
-# list_of_strings = ['9', '0', '32', '8', '2', '8', '64', '29', '42', '99']
-# numbers = [int(n) for n in list_of_strings]
-# result = [n for n in numbers if n % 2 == 0]
-# print(result)
+import pandas as pd
+# Keyword Method with iterrows()
+# {new_key:new_value for (index, row) in df.iterrows()}
 
-weather_c = {"Monday": 12, "Tuesday": 14, "Wednesday": 15, "Thursday": 14, "Friday": 21, "Saturday": 22, "Sunday": 24}
-weather_f = {day:(temp * (9/5)) + 32 for (day, temp) in weather_c.items()}
-print(weather_f)
+#TODO 1. Create a dictionary in this format:
+{"A": "Alfa", "B": "Bravo"}
 
-student_dict = {
-    "student": ["Angela", "James", "Lily"],
-    "score": [56, 76, 98]
-}
+#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
+data = pd.read_csv("nato_phonetic_alphabet.csv")
+word = input("Enter a word: ").upper()
+word_letters = list(word)
+new_code= []
+for letter in word_letters:
+    try:
+        for (index, row) in data.iterrows():
+            if row.letter == letter:
+                new_code.append(row.code)
+    except:
+        print("Sorry, only letters in the alphabet please.")
+        
+print(new_code)
 
-#Looping through dictionaries:
-for (key, value) in student_dict.items():
-    #Access key and value
-    pass
-
-import pandas
-student_data_frame = pandas.DataFrame(student_dict)
-
-#Loop through rows of a data frame
-for (index, row) in student_data_frame.iterrows():
-    #Access index and row
-    #Access row.student or row.score
-    pass
+nato_dict = {row.letter: row.code for (index, row) in data.iterrows()}
+new_code2 = [nato_dict[letter] for letter in word]
+print(new_code2)
