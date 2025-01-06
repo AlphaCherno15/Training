@@ -1,7 +1,9 @@
+from re import search
 from tkinter import *
 from tkinter import messagebox
 import random as rd
 import pyperclip as pclip
+import json
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate():
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
@@ -27,18 +29,52 @@ def add_password():
     link = link_entry.get()
     user = user_entry.get()
     password = password_entry.get()
+    new_data = {
+        link: {
+            "user": user,
+            "password": password,
+        },
+    }
     if len(link) == 0 or len(user) == 0 or len(password) == 0 :
         messagebox.showwarning(title="Password Manager", message="Please fill out all the fields.")
     else:
-        save = messagebox.askokcancel(title="Password Manager", message=f"Your password as: \n\nLink: {link} "
-                                                                        f"\nUser: {user} "
-                                                                        f"\nPassword: {password} \n\nIs OK to save?")
-        if save is True:
-            with open("data.txt", mode="a") as data:
-                data.write(f"Link: {link} | User: {user} | Password: {password}\n")
+        try:
+             with open("data.json", "r") as data_file:
+                data = json.load(data_file)
+        except FileNotFoundError:
+            with open("data.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+                # data_file.write(f"Link: {link} | User: {user} | Password: {password}\n")
+        #else only exec if try is successful
+        else:
+            data.update(new_data)
+            with open("data.json", "w") as data_file:
+                json.dump(data, data_file, indent=4)
+        finally:
+            with open("data.txt", mode="a") as data_file:
+                data_file.write(f"Link: {link} | User: {user} | Password: {password}\n")
             link_entry.delete(0, "end")
             password_entry.delete(0, "end")
             link_entry.focus()
+# ---------------------------- SEARCH PASSWORD ------------------------------- #
+def look():
+    link = link_entry.get()
+    try:
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showwarning(title="Password Manager", message="No data file found!")
+    else:
+        try:
+            messagebox.showinfo(title="Password Manager", message=f"{link}\n"
+                                                                     f"User: {data[link]["user"]}\n"
+                                                                     f"Password: {data[link]["password"]}")
+        except KeyError as e:
+            messagebox.showwarning(title="Password Manager", message= f'{e} not found')
+# ---------------------------- COPY SETUP ------------------------------- #
+def copy(item):
+    copy_item = item_entry.get()
+    pclip.copy(copy_item)
 # ---------------------------- UI SETUP ------------------------------- #
 # main window
 root = Tk()
@@ -68,5 +104,12 @@ generator_button = Button(text="Generate Password", command=generate)
 generator_button.grid(row=3, column=2)
 add_button = Button(text="Add", command=add_password, width=38, pady=5)
 add_button.grid(row=4, column=1, columnspan=2)
-
+search_button = Button(text="Search for link/Name", command=look, width=38, pady=5)
+search_button.grid(row=5, column=1, columnspan=2 )
+copy_link = Button(text="Copy", lambda: command=copy("link"), pady=5)
+copy_link.grid(row=1, column=3)
+copy_user = Button(text="Copy", command=copy("user"), pady=5)
+copy_user.grid(row=2, column=3)
+copy_pass = Button(text="Copy", command=copy("password"), pady=5)
+copy_pass.grid(row=3, column=3)
 root.mainloop()
