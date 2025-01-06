@@ -17,9 +17,14 @@ for letter in word_letters:
                 new_code.append(row.code)
     except:
         print("Sorry, only letters in the alphabet please.")
+        break
         
 print(new_code)
 
 nato_dict = {row.letter: row.code for (index, row) in data.iterrows()}
-new_code2 = [nato_dict[letter] for letter in word]
-print(new_code2)
+try:
+    new_code2 = [nato_dict[letter] for letter in word]
+except KeyError:
+    print("Sorry, only letters in the alphabet please.")
+else:
+    print(new_code2)
