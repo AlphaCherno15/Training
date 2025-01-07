@@ -1,4 +1,3 @@
-from re import search
 from tkinter import *
 from tkinter import messagebox
 import random as rd
@@ -22,20 +21,22 @@ def generate():
     rd.shuffle(password)  # this is the password_list
     password = "".join(password)
     password_entry.insert(0, password)
-    messagebox.showwarning(title="Password Manager", message="Password in the clipboard.")
+    # messagebox.showwarning(title="Password Manager", message="Password in the clipboard.")
     pclip.copy(password)
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def add_password():
+    name = name_entry.get()
     link = link_entry.get()
     user = user_entry.get()
     password = password_entry.get()
     new_data = {
-        link: {
+        name.title(): {
+            "link": link,
             "user": user,
             "password": password,
         },
     }
-    if len(link) == 0 or len(user) == 0 or len(password) == 0 :
+    if len(link) == 0 or len(user) == 0 or len(password) == 0 or len(name) == 0 :
         messagebox.showwarning(title="Password Manager", message="Please fill out all the fields.")
     else:
         try:
@@ -52,29 +53,28 @@ def add_password():
                 json.dump(data, data_file, indent=4)
         finally:
             with open("data.txt", mode="a") as data_file:
-                data_file.write(f"Link: {link} | User: {user} | Password: {password}\n")
+                data_file.write(f"Name: {name} | Link: {link} | User: {user} | Password: {password}\n")
             link_entry.delete(0, "end")
             password_entry.delete(0, "end")
             link_entry.focus()
 # ---------------------------- SEARCH PASSWORD ------------------------------- #
 def look():
-    link = link_entry.get()
+    name = name_entry.get().title()
     try:
         with open("data.json", "r") as data_file:
             data = json.load(data_file)
     except FileNotFoundError:
         messagebox.showwarning(title="Password Manager", message="No data file found!")
     else:
-        try:
-            messagebox.showinfo(title="Password Manager", message=f"{link}\n"
-                                                                     f"User: {data[link]["user"]}\n"
-                                                                     f"Password: {data[link]["password"]}")
-        except KeyError as e:
-            messagebox.showwarning(title="Password Manager", message= f'{e} not found')
-# ---------------------------- COPY SETUP ------------------------------- #
-def copy(item):
-    copy_item = item_entry.get()
-    pclip.copy(copy_item)
+        if name in data:
+            link_entry.delete(0, "end")
+            user_entry.delete(0, "end")
+            password_entry.delete(0, "end")
+            link_entry.insert(0, f"{data[name]["link"]}")
+            user_entry.insert(0, f"{data[name]["user"]}")
+            password_entry.insert(0, f"{data[name]["password"]}")
+        else:
+            messagebox.showwarning(title="Password Manager", message= f'{name} not found')
 # ---------------------------- UI SETUP ------------------------------- #
 # main window
 root = Tk()
@@ -85,31 +85,35 @@ image = PhotoImage(file="logo.png")
 canvas.create_image(100, 100, image=image)
 canvas.grid(row=0, column=1)
 # labels and entries
-link_label = Label(text="Link/Name:", pady=5)
-link_label.grid(row=1, column=0)
+name_label = Label(text="Name", pady=5)
+name_label.grid(row=1, column=0)
+name_entry =  Entry(width=45)
+name_entry.grid(row=1, column=1, columnspan=2)
+name_entry.focus()
+link_label = Label(text="Link", pady=5)
+link_label.grid(row=2, column=0)
 link_entry =  Entry(width=45)
-link_entry.grid(row=1, column=1, columnspan=2)
-link_entry.focus()
+link_entry.grid(row=2, column=1, columnspan=2)
 user_label = Label(text="Username:", pady=5)
-user_label.grid(row=2, column=0)
+user_label.grid(row=3, column=0)
 user_entry =  Entry(width=45)
-user_entry.grid(row=2, column=1, columnspan=2)
+user_entry.grid(row=3, column=1, columnspan=2)
 user_entry.insert(0, "@gmail.com")
 password_label = Label(text="Password:", pady=5)
-password_label.grid(row=3, column=0)
+password_label.grid(row=4, column=0)
 password_entry =  Entry(width=27)
-password_entry.grid(row=3, column=1)
+password_entry.grid(row=4, column=1)
 # buttons
-generator_button = Button(text="Generate Password", command=generate)
-generator_button.grid(row=3, column=2)
+generator_button = Button(text="Generate Password", command=generate, padx= 5)
+generator_button.grid(row=4, column=2)
 add_button = Button(text="Add", command=add_password, width=38, pady=5)
-add_button.grid(row=4, column=1, columnspan=2)
+add_button.grid(row=5, column=1, columnspan=2)
 search_button = Button(text="Search for link/Name", command=look, width=38, pady=5)
-search_button.grid(row=5, column=1, columnspan=2 )
-copy_link = Button(text="Copy", lambda: command=copy("link"), pady=5)
-copy_link.grid(row=1, column=3)
-copy_user = Button(text="Copy", command=copy("user"), pady=5)
-copy_user.grid(row=2, column=3)
-copy_pass = Button(text="Copy", command=copy("password"), pady=5)
-copy_pass.grid(row=3, column=3)
+search_button.grid(row=6, column=1, columnspan=2 )
+copy_link = Button(text="Copy",command=lambda:pclip.copy(link_entry.get()), padx=5)
+copy_link.grid(row=2, column=3)
+copy_user = Button(text="Copy", command=lambda:pclip.copy(user_entry.get()), padx=5)
+copy_user.grid(row=3, column=3)
+copy_pass = Button(text="Copy", command=lambda:pclip.copy(password_entry.get()), padx=5)
+copy_pass.grid(row=4, column=3)
 root.mainloop()
