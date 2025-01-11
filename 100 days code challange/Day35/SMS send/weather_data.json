@@ -1,0 +1,164 @@
+{
+    "cod": "200",
+    "message": 0,
+    "cnt": 4,
+    "list": [
+        {
+            "dt": 1736629200,
+            "main": {
+                "temp": -1.17,
+                "feels_like": -6.27,
+                "temp_min": -1.38,
+                "temp_max": -1.17,
+                "pressure": 1001,
+                "sea_level": 1001,
+                "grnd_level": 999,
+                "humidity": 95,
+                "temp_kf": 0.21
+            },
+            "weather": [
+                {
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "overcast clouds",
+                    "icon": "04n"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 4.82,
+                "deg": 17,
+                "gust": 6.49
+            },
+            "visibility": 10000,
+            "pop": 0,
+            "sys": {
+                "pod": "n"
+            },
+            "dt_txt": "2025-01-11 21:00:00"
+        },
+        {
+            "dt": 1736640000,
+            "main": {
+                "temp": -1.15,
+                "feels_like": -5.44,
+                "temp_min": -1.19,
+                "temp_max": -1.15,
+                "pressure": 1001,
+                "sea_level": 1001,
+                "grnd_level": 1000,
+                "humidity": 85,
+                "temp_kf": 0.04
+            },
+            "weather": [
+                {
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "overcast clouds",
+                    "icon": "04n"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 3.66,
+                "deg": 28,
+                "gust": 5.23
+            },
+            "visibility": 10000,
+            "pop": 0,
+            "sys": {
+                "pod": "n"
+            },
+            "dt_txt": "2025-01-12 00:00:00"
+        },
+        {
+            "dt": 1736650800,
+            "main": {
+                "temp": -1.35,
+                "feels_like": -5.93,
+                "temp_min": -1.35,
+                "temp_max": -1.35,
+                "pressure": 1001,
+                "sea_level": 1001,
+                "grnd_level": 1000,
+                "humidity": 80,
+                "temp_kf": 0
+            },
+            "weather": [
+                {
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "overcast clouds",
+                    "icon": "04n"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 3.98,
+                "deg": 15,
+                "gust": 5.67
+            },
+            "visibility": 10000,
+            "pop": 0,
+            "sys": {
+                "pod": "n"
+            },
+            "dt_txt": "2025-01-12 03:00:00"
+        },
+        {
+            "dt": 1736661600,
+            "main": {
+                "temp": -1.14,
+                "feels_like": -6.31,
+                "temp_min": -1.14,
+                "temp_max": -1.14,
+                "pressure": 1001,
+                "sea_level": 1001,
+                "grnd_level": 1000,
+                "humidity": 79,
+                "temp_kf": 0
+            },
+            "weather": [
+                {
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "overcast clouds",
+                    "icon": "04n"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 4.94,
+                "deg": 13,
+                "gust": 7.2
+            },
+            "visibility": 10000,
+            "pop": 0,
+            "sys": {
+                "pod": "n"
+            },
+            "dt_txt": "2025-01-12 06:00:00"
+        }
+    ],
+    "city": {
+        "id": 6159244,
+        "name": "Summerside",
+        "coord": {
+            "lat": 46.4086,
+            "lon": -63.7915
+        },
+        "country": "CA",
+        "population": 14808,
+        "timezone": -14400,
+        "sunrise": 1736596582,
+        "sunset": 1736628573
+    }
+}
