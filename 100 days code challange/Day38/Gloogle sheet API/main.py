@@ -3,9 +3,9 @@ import requests as rq, datetime as dt, os
 today_date = dt.datetime.now().strftime("%d/%m/%Y")
 now_time = dt.datetime.now().strftime("%X")
 
-# APP_ID = "dad518ee"
-# API_KEY = "e0652d0e21cc4942f22619c2934c9a4d"
-# HOST_DOMAIN = "https://trackapi.nutritionix.com"
+# APP_ID = ""
+# API_KEY = ""
+# HOST_DOMAIN = ""
 # In PyCharm, you can add your environment variables under "Edit Configurations".
 # If you click on the little symbol to the right under "Environment Variables,
 # you will bring up a window where you can add the key-value pairs one by one.
@@ -29,7 +29,7 @@ param = {
 response = rq.post(f"{HOST_DOMAIN}/v2/natural/exercise/", json=param, headers=headers)
 result = response.json()
 
-token = "bnVsbDpudWxsr"
+token = ""
 auth = bearer_headers = {
 "Authorization": f"Bearer {token}"
 }
@@ -43,5 +43,5 @@ for exercise in result["exercises"]:
             "calories": exercise["nf_calories"]
         }
     }
-    write = rq.post(f"https://api.sheety.co/4d1918be2d52c4400f6c1e0d585f3177/exercisesTrack/página1", json=inputs, headers=auth)
+    write = rq.post(f"https://api.sheety.co/", json=inputs, headers=auth)
     print(write.text)
