@@ -1,0 +1,22 @@
+{
+    "Casio_GSHOCK":{
+        "store":"amazon",
+        "url":"https://www.amazon.com/dp/B075CYMYK6?ref_=cm_sw_r_cp_ud_ct_FM9M699VKHTT47YD50Q6&th=1",
+        "price": 10
+        },
+    "AreiaGata": {
+        "store":"amazon",
+        "url":"https://www.amazon.ca/dp/B091JD4DNC?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1",
+        "price": 10
+        },
+    "lego_F40":{
+        "store":"amazon",
+        "url":"https://www.amazon.ca/LEGO-Champions-Supercar-Minifigure-Collectible/dp/B0CV27Y7ZT/132-7943018-0560548?pd_rd_w=SlbSA&content-id=amzn1.sym.5c9f0cb5-2d5e-4447-9905-de7f3ec4ec72&pf_rd_p=5c9f0cb5-2d5e-4447-9905-de7f3ec4ec72&pf_rd_r=BBSA8AE30T3CZY74JR6S&pd_rd_wg=L74wf&pd_rd_r=895a76d4-6889-4490-8a4a-cd3cb2dfe134&pd_rd_i=B0CV27Y7ZT&psc=1",
+        "price": 30
+        },
+    "Criado_Mudo":{
+        "store":"wayfiar",
+        "url":"https://www.wayfair.ca/furniture/pdp/august-grove-adaija-18w-nightstand-with-charging-station-farmhouse-end-table-with-2-drawers-open-storage-c009722063.html?piid=2025445603",
+        "price": 250
+    }
+    }
