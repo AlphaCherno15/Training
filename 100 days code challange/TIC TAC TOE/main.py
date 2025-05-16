@@ -61,7 +61,19 @@ def victory(symbol):
         return True
     else:
         return False
-
+        
+def victory2(symbol):
+    winning_combinations = [
+        [7, 8, 9], [4, 5, 6], [1, 2, 3],  # rows
+        [1, 4, 7], [2, 5, 8], [3, 6, 9],  # columns
+        [1, 5, 9], [3, 5, 7]              # diagonals
+    ]
+    
+    for combo in winning_combinations:
+        if all(symbol in tic_tac[num] for num in combo):
+            return True
+    return False
+    
 while True:
     print(f'{tic_tac[7]}{tic_tac[8]}{tic_tac[9]}')
     print(f'{tic_tac[4]}{tic_tac[5]}{tic_tac[6]}')
