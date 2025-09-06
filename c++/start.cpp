@@ -81,6 +81,12 @@ int main() {
     std::getline(std::cin >> std::ws, greeting); // taking a full line input
     cout << "You entered: " << greeting << std::endl;
 
+    // const parameter example
+    // turn a variable into a constant parameter, does not allow modification
+    const int constantParam = 100;
+    cout << "Constant parameter value: " << constantParam << std::endl;
+
 
     return 0;
+
 }
