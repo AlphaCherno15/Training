@@ -51,6 +51,14 @@ int fill_function() {
     }
     return 0;
 }
+
+int twodimensional_array() {
+    // 2D array example x[rows][columns] = { {}, {} }
+    int myNumbers[2][3] = { {1, 2, 3}, {4, 5, 6} };
+    print(myNumbers[1][2]); // Outputs 6
+    return 0;
+}
+
 int main() {
 
     // arrays in C++
@@ -96,4 +104,5 @@ int main() {
     fill_function();
 
     return 0;
+
 }
